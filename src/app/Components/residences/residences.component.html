@@ -1,36 +1,53 @@
-
-<table>
+<div class="container">
+    <div class="row"> 
+        <input class="form-control" name="search" 
+        [(ngModel)]="searchText">
+<table class="table">
+    <thead>
     <tr>
         <th>Image</th>
         <th>ID</th>
         <th>Name</th>
         <th>Status</th>
+        <th colspan="2">Actions</th>
     </tr>
-    <tr *ngFor="let r of listResidences">
+    </thead>
+    <tbody>
+    <tr *ngFor="let r of filterResidence()">
         <td><img [src]="r.image" width="50" height="50"></td>
         <td>{{r.id}}</td>
         <td>{{r.name}}</td>
-        <td>{{r.status}}</td>
-        <td><button (click)="selectResidence(r)">Show location</button>
-        <button (click)="addToFavoris(r)">Like</button>
+        <td *ngIf="r.status == 'Disponible'"> ✅ {{r.status}}</td>
+        <td *ngIf="r.status == 'Vendu'"> ❌ {{r.status}}</td>
+        <td *ngIf="r.status == 'En Construction'"> 🚧 {{r.status}}</td>
+        <td><button class="btn btn-outline-primary" (click)="selectResidence(r)">Show location</button></td>
+       <td> <button class="btn btn-outline-danger" (click)="addToFavoris(r)">{{isFavoris(r) == -1 ? 'Like' : 'Dislike'}}</button>
         </td>
     </tr>
+    </tbody>
 </table>
-<p *ngIf="show"> Addresse de Résidence {{x.name}} : {{x.address}}</p>
+<p class="alert alert-primary" *ngIf="show"> Addresse de Résidence {{x.name}} : {{x.address}}</p>
 
-<h3>Liste des favoris</h3>
-<table>
+<h3 class="text-center">Liste des favoris</h3>
+<table class="table">
+    <thead>
     <tr>
         <th>Image</th>
         <th>ID</th>
         <th>Name</th>
         <th>Status</th>
     </tr>
+    </thead>
+    <tbody>
     <tr *ngFor="let r of listFavoris">
         <td><img [src]="r.image" width="50" height="50"></td>
         <td>{{r.id}}</td>
         <td>{{r.name}}</td>
-        <td>{{r.status}}</td>
-       
+        <td *ngIf="r.status == 'Disponible'"> ✅ {{r.status}}</td>
+        <td *ngIf="r.status == 'Vendu'"> ❌ {{r.status}}</td>
+        <td *ngIf="r.status == 'En Construction'"> 🚧 {{r.status}}</td>
     </tr>
+    </tbody>
 </table>
+</div>
+</div>

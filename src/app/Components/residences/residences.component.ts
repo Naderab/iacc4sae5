@@ -52,11 +52,26 @@ export class ResidencesComponent {
   }
 
   addToFavoris(r: Residence) {
-    let residence = this.listFavoris.find((e) => e.id == r.id);
-    console.log(residence)
-    if (residence == undefined) {
+    //let residence = this.listFavoris.find((e) => e.id == r.id);
+    //console.log(residence)
+    if (this.isFavoris(r) == -1) {
       this.listFavoris.push(r);
+    } else {
+      //let index = this.listFavoris.findIndex((e) => e.id == r.id);
+      this.listFavoris.splice(this.isFavoris(r),1)
     }
-    
+  }
+
+  isFavoris(r: Residence) {
+    return this.listFavoris.findIndex((e) => e.id == r.id);
+  }
+
+  searchText: string = ''
+  
+  filterResidence() {
+    return this.listResidences.filter(
+      (e) => e.address.toLowerCase()
+        .includes(this.searchText.toLowerCase())
+    )
   }
 }
