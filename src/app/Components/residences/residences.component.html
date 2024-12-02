@@ -23,6 +23,7 @@
         <td><button class="btn btn-outline-primary" (click)="selectResidence(r)">Show location</button></td>
        <td> <button class="btn btn-outline-danger" (click)="addToFavoris(r)">{{isFavoris(r) == -1 ? 'Like' : 'Dislike'}}</button>
         </td>
+        <td><button class="btn btn-primary" [routerLink]="['/details/',r.id]">Détails</button></td>
     </tr>
     </tbody>
 </table>
