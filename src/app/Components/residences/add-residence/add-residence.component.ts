@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ResidenceService } from '../../../services/residence.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-residence',
@@ -8,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AddResidenceComponent {
 
+  constructor(private residenceService:ResidenceService,private router:Router){}
   residence: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required,Validators.minLength(3)]),
     address: new FormControl('', [Validators.required]),
@@ -34,5 +37,7 @@ export class AddResidenceComponent {
     // console.log(this.image.value);
     // console.log(this.status.value);
     console.log(this.residence.value)
+    this.residenceService.addResidence(this.residence.value);
+    this.router.navigate(['/residences'])
   }
 }
