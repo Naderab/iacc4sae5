@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Apartment } from 'src/app/core/models/apartment';
+import { ApartmentService } from '../../../services/apartment.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-apartments-by-residence',
@@ -7,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class ApartmentsByResidenceComponent {
 
+  apartments: Apartment[] = [];
+
+  constructor(private apartmentService: ApartmentService,private activated:ActivatedRoute) {
+    this.apartments = this.apartmentService.listApatments.filter((a)=>a.ResidenceId == this.activated.snapshot.params['id'])
+  }
 }
