@@ -1,0 +1,19 @@
+{
+  "residence": [
+    {
+      "name": "r1",
+      "address": "Tunis",
+      "image": "/assets/images/R1.jpg",
+      "status": "Disponible",
+      "id": 1
+    },
+    {
+      "name": "R22",
+      "address": "Ben arouss",
+      "image": "/assets/images/R2.jpg",
+      "status": "En Construction",
+      "id": 2
+    }
+  ],
+  "apartment": []
+}

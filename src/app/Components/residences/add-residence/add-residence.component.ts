@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ResidenceService } from '../../../services/residence.service';
 import { Router } from '@angular/router';
+import { ConsumerService } from '../../../services/consumer.service';
 
 @Component({
   selector: 'app-add-residence',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AddResidenceComponent {
 
-  constructor(private residenceService:ResidenceService,private router:Router){}
+  constructor(private residenceService:ResidenceService,private router:Router,private consumer:ConsumerService){}
   residence: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required,Validators.minLength(3)]),
     address: new FormControl('', [Validators.required]),
@@ -37,7 +38,10 @@ export class AddResidenceComponent {
     // console.log(this.image.value);
     // console.log(this.status.value);
     console.log(this.residence.value)
-    this.residenceService.addResidence(this.residence.value);
-    this.router.navigate(['/residences'])
+    //this.residenceService.addResidence(this.residence.value);
+    this.consumer.add(this.residence.value).subscribe({
+      next: () => this.router.navigate(['/residences']),
+    });
+    
   }
 }
